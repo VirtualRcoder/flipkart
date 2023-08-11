@@ -129,7 +129,7 @@ function LoginDialog({open, setOpen}){
                             <TextField variant="standard" label="Enter Email" name="email" onChange={(e)=> handleInput(e)}/>
                             <TextField variant="standard" label="Enter Password" name="password" onChange={(e)=> handleInput(e)}/>
                             <TextField variant="standard" label="Enter Phone" name="phone" onChange={(e)=> handleInput(e)}/>
-                            <LoginButton>Continue</LoginButton>
+                            <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
                         </Wrapper>
                     }
                 </Box>

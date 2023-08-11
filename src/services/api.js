@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const URL = "http://localhost:8000";
+const URL = "https://yvlcgc-8000.csb.app";
 
 async function authenticationSignup(data) {
   try {
-    await api.post(`${URL}/signup`, data);
+    return await axios.post(`${URL}/signup`, data);
   } catch (error) {
     console.log("Error while calling sign up api", error);
   }
