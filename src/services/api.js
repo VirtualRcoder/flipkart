@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const URL = "https://yvlcgc-8000.csb.app";
+const URL = "https://f59pmy-8000.csb.app";
 
-async function authenticationSignup(data) {
+export async function authenticationSignup(data) {
   try {
     return await axios.post(`${URL}/signup`, data);
   } catch (error) {
@@ -10,4 +10,11 @@ async function authenticationSignup(data) {
   }
 }
 
-export default authenticationSignup;
+export async function authenticateLogin(data) {
+  try {
+    return await axios.post(`${URL}/login`, data);
+  } catch (error) {
+    console.log("Error while calling login api", error);
+    return error.response
+  }
+}
