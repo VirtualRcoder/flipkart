@@ -5,10 +5,14 @@ import {styled} from "@mui/material";
 
 import { bannerData } from "../../constants/Data";
 
-const Image = styled('img') ({
+const Image = styled('img')(({theme})=> ({
     width: '100%',
-    heught: 280
-})
+    heught: 280,
+    [theme.breakpoints.down('sm')]:{
+      objectFit: 'cover',
+      height: 180
+    }
+}))
 
 const responsive = {
     desktop: {
@@ -35,6 +39,7 @@ function Banner(){
             autoPlaySpeed={4000}
             swipeable={false}
             draggable={false}
+            keyBoardControl={true}
             containerClass="carousel-container"
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px">
