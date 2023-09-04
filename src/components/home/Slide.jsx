@@ -2,6 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import Countdown from "react-countdown";
+import { Link } from "react-router-dom";
 
 import { Box, styled, Typography, Button } from "@mui/material";
 
@@ -64,7 +65,6 @@ const Text = styled(Typography)`
 function Slide({ products, title, timer }) {
   const timerURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg";
-  console.log(timer);
 
   const renderer = ({ hours, minutes, seconds }) => {
     return (
@@ -102,16 +102,21 @@ function Slide({ products, title, timer }) {
       >
         {products.map((product) => {
           return (
-            <Box textAlign="center" style={{ padding: "25px 15px" }}>
-              <Image src={product.url} alt="product" />;
-              <Text style={{ fontWeight: 600, color: "#212121" }}>
-                {product.title.shortTitle}
-              </Text>
-              <Text style={{ color: "green" }}>{product.discount}</Text>
-              <Text style={{ color: "#212121", opacity: ".6" }}>
-                {product.tagline}
-              </Text>
-            </Box>
+            <Link
+              to={`product/${product.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Box textAlign="center" style={{ padding: "25px 15px" }}>
+                <Image src={product.url} alt="product" />;
+                <Text style={{ fontWeight: 600, color: "#212121" }}>
+                  {product.title.shortTitle}
+                </Text>
+                <Text style={{ color: "green" }}>{product.discount}</Text>
+                <Text style={{ color: "#212121", opacity: ".6" }}>
+                  {product.tagline}
+                </Text>
+              </Box>
+            </Link>
           );
         })}
       </Carousel>
