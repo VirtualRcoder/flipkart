@@ -1,10 +1,13 @@
-import {AppBar, Toolbar, Box, Typography, styled} from '@mui/material';
+import {AppBar, Toolbar, Box, Typography, styled, IconButton, Drawer, List, ListItem} from '@mui/material';
+import {Menu} from '@mui/icons-material';
+
 import Search from "./Search";
 import CustomButton from "./CustomButton";
 
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-const styledHeader = styled(AppBar)`
+const StyledHeader = styled(AppBar)`
     background: #2874f0;
     height: 55px;
 `;
@@ -26,17 +29,57 @@ const PlusImage = styled('img')({
     marginLeft: 4
 })
 
-const CustomButtonWrapper = styled(Box)`
+const CustomButtonWrapper = styled(Box)(({ theme })=>({
+    margin: '0 5% 0 auto',
+    [theme.breakpoints.down('md')]:{
+        display: 'none'
+    }
+}));
 
-`;
+const MenuButton = styled(IconButton)(({ theme })=>({
+    display: 'none',
+    [theme.breakpoints.down('md')]:{
+        display: 'block'
+    }
+}));
 
 function Header(){
     const logo = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png';
     const sub = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png';
+
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = ()=>{
+        setOpen(true)
+    }
+
+    const handleClose = ()=>{
+        setOpen(false)
+    }
+
+    const lists = ()=>{
+        return (
+            <Box style={{ width: 200 }} onClick={handleClose}>
+                <List>
+                    <ListItem button>
+                        <CustomButton />
+                    </ListItem>
+                </List>
+            </Box>
+        )
+    }
     return(
-        <AppBar>
+        <StyledHeader>
             <Toolbar style={{minHeight: 55}}>
-                <Component to='/'>
+                <MenuButton color="inherit" onClick={handleOpen}>
+                    <Menu/>
+                </MenuButton>
+
+                <Drawer open={open} onClose={handleClose}> 
+                    {lists()}
+                </Drawer>
+
+                <Component to="/">
                     <img src={logo} alt = 'logo' style={{width: 75}}/>
                     <Box    style={{display: 'flex'}}>
                         <SubHeading>
@@ -49,11 +92,11 @@ function Header(){
                     </Box>
                 </Component>         
                 <Search/>      
-                <Box style={{marginLeft: '5%'}}>
+                <CustomButtonWrapper style={{marginLeft: '5%'}}>
                     <CustomButton/>
-                </Box> 
+                </CustomButtonWrapper> 
             </Toolbar>
-        </AppBar>
+        </StyledHeader>
     )
 }
 
